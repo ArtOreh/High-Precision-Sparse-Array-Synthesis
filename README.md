@@ -15,9 +15,19 @@ Figures and diagrams used in the paper.
 ### 3. /src
 *   **`optimizer.py`**: A Python script that executes the optimization process. By default, it runs a single iteration, displays the resulting beam pattern plot, and saves the element positions to a file named `coordinates_{N}_{K}.txt` in the root directory.
 
+To install the required libraries, run:
+```bash
+pip install -r requirements.txt
+```
+
 The `optimizer.py` script is designed for full reproducibility. 
 Specific settings such as initial step size, etc. are provided as comments within the source code for each specific case.
 To start the synthesis: `python optimizer.py`
+
+To start the synthesis: 
+```bash
+python optimizer.py
+```
 
 ## License
 Distributed under the **GNU General Public License v3 (GPLv3)**.
