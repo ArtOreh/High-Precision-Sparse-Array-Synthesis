@@ -62,7 +62,7 @@ def select_configuration():
     print(" [5] Large:   400 elements on 300.0 lambda aperture")
     print(" [6] Sat.:    600 elements on 450.0 lambda aperture")
     print(" [7] Over.:  1000 elements on 750.0 lambda aperture")
-    print(" [8] Extreme:10000 elements on 7500.0 lambda aperture (Stress-test)")
+    #print(" [8] Extreme:10000 elements on 7500.0 lambda aperture (Stress-test)")
     print("="*60)
 
     try:
@@ -75,7 +75,7 @@ def select_configuration():
             5: (400, 300.0),
             6: (600, 450.0),
             7: (1000, 750.0),
-            8: (10000, 7500.0)
+            #8: (10000, 7500.0)
         }
         
         if choice in configs:
