@@ -51,22 +51,29 @@ def plot_interference(points, k_max, zoom_limit=0.15):
     plt.show()
 
 def select_configuration():
-    print("="*60)
-    print("   Sparse Array Optimization: High-Precision Framework")
-    print("="*60)
+    print("="*64)
+    print(f"{'Sparse Array Optimization: High-Precision Framework':^64}")
+    print("="*64)
     print("Available Configurations:")
-    print(" [1] Case A:  152 elements on  98.5 lambda aperture")
-    print(" [2] Case B:  132 elements on  90.5 lambda aperture")
-    print(" [3] Case C:   78 elements on  73.0 lambda aperture")
-    print(" [4] Case D:  251 elements on 250.5 lambda aperture")
-    print(" [5] Large:   400 elements on 300.0 lambda aperture")
-    print(" [6] Sat.:    600 elements on 450.0 lambda aperture")
-    print(" [7] Over.:  1000 elements on 750.0 lambda aperture")
-    #print(" [8] Extreme:10000 elements on 7500.0 lambda aperture (Stress-test)")
-    print("="*60)
 
+    configs = [
+        ("1", "Case A", "152", "98.5", ""),
+        ("2", "Case B", "132", "90.5", ""),
+        ("3", "Case C", "78", "73.0", ""),
+        ("4", "Case D", "251", "250.5", ""),
+        ("5", "Large", "400", "300.0", ""),
+        ("6", "Sat.", "600", "450.0", ""),
+        ("7", "Over.", "1000", "750.0", ""),
+        ("8", "Ext.", "2000", "1500.0", "(Stress-test)"),
+        ("9", "Ext.", "3000", "2250.0", "(Stress-test)")
+    ]
+
+    for cfg_id, name, n, nu, note in configs:
+        print(f" [{cfg_id}] {name:<8} : {n:>5} elements on {nu:>7} lambda aperture {note}")
+    print("="*64)
+    
     try:
-        choice = int(input("Select configuration number (1-8): "))
+        choice = int(input("Select configuration number (1-9): "))
         configs = {
             1: (152, 98.5),
             2: (132, 90.5),
@@ -75,7 +82,8 @@ def select_configuration():
             5: (400, 300.0),
             6: (600, 450.0),
             7: (1000, 750.0),
-            #8: (10000, 7500.0)
+            8: (2000, 1500.0),
+            9: (3000, 2250.0)
         }
         
         if choice in configs:
