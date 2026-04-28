@@ -8,7 +8,7 @@ This repository provides the numerical results and optimization engine for the s
 Numerical data for benchmark and large-scale cases (N = 78 to 1000).
 *   **`/coordinates`**: Optimized element positions in `.txt` format. Each file contains a comma-separated list of normalized coordinates $x \in [0, 1]$. These files are provided for independent verification in third-party electromagnetic simulation software and **`visualizer.py`**: A standalone script to reproduce radiation patterns and calculate PSLL values directly from the coordinate files.
 *   **`/plots`**: High-resolution radiation patterns (PDF and PNG) for each reported case, demonstrating the achieved equiripple state.
-* **`/saturation_data`**: Four datasets containing PSLL values and optimized element positions(boundary points \(0\) and \(1\) are excluded) for different array average element spacing ($\rho = \{0.75, 1.0, 1.5, 2.0\}$) at a fixed main lobe width ($2/\nu$), optimization zone $u \in [1/\nu, 1]$. This data illustrates the physical saturation floor of the aperture.
+* **`/saturation_data`**: Four datasets containing PSLL values and optimized element positions(boundary points 0 and 1 are excluded) for different array average element spacing ($\rho = \{0.75, 1.0, 1.5, 2.0\}$) at a fixed main lobe width ($2/\nu$), optimization zone $u \in [1/\nu, 1]$. This data illustrates the physical saturation floor of the aperture.
 ### 2. /article_figures
 Figures and diagrams used in the paper.
 
