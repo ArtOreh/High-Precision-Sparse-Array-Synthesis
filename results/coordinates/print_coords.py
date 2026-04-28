@@ -65,7 +65,7 @@ def select_configuration():
         ("6", "Sat.", "600", "450.0", ""),
         ("7", "Over.", "1000", "750.0", ""),
         ("8", "Ext.", "2000", "1500.0", "(Stress-test)"),
-        ("9", "Ext.", "3000", "2250.0", "(Stress-test)")
+        #("9", "Ext.", "3000", "2250.0", "(Stress-test)")
     ]
 
     for cfg_id, name, n, nu, note in configs:
@@ -73,7 +73,7 @@ def select_configuration():
     print("="*64)
     
     try:
-        choice = int(input("Select configuration number (1-9): "))
+        choice = int(input("Select configuration number (1-8): "))
         configs = {
             1: (152, 98.5),
             2: (132, 90.5),
@@ -83,7 +83,7 @@ def select_configuration():
             6: (600, 450.0),
             7: (1000, 750.0),
             8: (2000, 1500.0),
-            9: (3000, 2250.0)
+            #9: (3000, 2250.0)
         }
         
         if choice in configs:
