@@ -45,7 +45,7 @@ def plot_interference(points, k_max, zoom_limit=0.15):
     ax.grid(True, which='major', color='#EEEEEE', lw=0.5)
 
     ax.legend(loc='upper right', frameon=True, edgecolor='black', framealpha=1)
-    plt.savefig(f'pattern_{n_points + 2}_{k_max}.pdf', format='pdf', dpi=600)
+    plt.savefig(f'pattern_{n_points}_{k_max}.pdf', format='pdf', dpi=600)
     
     plt.show()
 
