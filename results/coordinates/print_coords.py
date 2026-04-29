@@ -23,7 +23,6 @@ def plot_interference(points, k_max, zoom_limit=0.15):
     m = np.linspace(0, k_max, 1_000_000) 
     u = m / k_max
     
-    # Вместо m.reshape @ pts.reshape
     total_sum = np.zeros(len(m), dtype=np.complex128)
     for p in pts:
         total_sum += np.exp(2j * np.pi * m * p)
