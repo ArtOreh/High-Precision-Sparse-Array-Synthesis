@@ -8,8 +8,8 @@ the Peak Sidelobe Level (PSLL) in large-scale linear sparse arrays.
 Key features:
 - High-precision analytical evaluation of PSLL (avoids grid-based errors).
 - Modified gradient descent optimized for high-dimensional manifold navigation.
-- Numba-accelerated JIT compilation for scalability.
-- Support for extreme-scale synthesis (up to N=10,000).
+- Numba-accelerated JIT compilation.
+- Support for extreme-scale synthesis.
 
 Author: [Orekhov Artem/GitHub https://github.com/ArtOreh]
 Date: April 2026
