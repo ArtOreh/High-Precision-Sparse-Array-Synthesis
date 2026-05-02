@@ -305,6 +305,9 @@ def optimize_single_run(n_internal, k_val, iterations, lr):
     best_pts = pts.copy()
     min_sll = 1e10
     for i in range(iterations):
+        # NOTE: The results in the submitted paper were obtained using dynamic frequency scaling.
+        # However, further tests indicate that this frequency increase 
+        # may not actually provide a performance boost.
         sll_val, u_peak = calculate_peak_sll(pts, k_val*min(2*(i+1)/iterations, 1))
         
         if sll_val < min_sll:
