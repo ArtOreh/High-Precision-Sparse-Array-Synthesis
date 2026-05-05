@@ -29,7 +29,7 @@ To start the synthesis:
 python optimizer.py
 ```
 
-* **Example Case:** N=132, Aperture $L=90.5\lambda$, PSLL $\approx$ -25.8 dB.
+# **Example Case:** N=132, Aperture $L=90.5\lambda$, PSLL $\approx$ -25.8 dB.
 
 ![Example Case 132](results/plots/132_90.5.png)
 
