@@ -15,6 +15,12 @@ Figures and diagrams used in the paper.
 ### 3. /src
 *   **`optimizer.py`**: A Python script that executes the optimization process. By default, it runs a single iteration, displays the resulting beam pattern plot, and saves the element positions to a file named `coordinates_{N}_{K}.txt` in the root directory.
 
+### 4. /mom_verification
+Full-wave electromagnetic validation layout for the patch-antenna array design in MATLAB.
+*   **`coordinates_42_42.0.txt`**: Optimized normalized spatial coordinates for the $N = 42$, $L = 42\lambda$ verification case.
+*   **`patch_array_mom_solver.m`**: A MATLAB Antenna Toolbox script that imports the coordinate file and models the 2D radiation pattern using the Method of Moments (MoM).
+
+
 To install the required libraries, run:
 ```bash
 pip install -r requirements.txt
