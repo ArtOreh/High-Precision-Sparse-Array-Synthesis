@@ -8,8 +8,8 @@ the Peak Sidelobe Level (PSLL) in large-scale linear sparse arrays.
 Key features:
 - High-precision analytical evaluation of PSLL (avoids grid-based errors).
 - Modified gradient descent optimized for high-dimensional manifold navigation.
-- Numba-accelerated JIT compilation.
-- Support for extreme-scale synthesis.
+- Numba-accelerated JIT compilation for scalability.
+- Support for extreme-scale synthesis (up to N=10,000).
 
 Author: [Orekhov Artem/GitHub https://github.com/ArtOreh]
 Date: April 2026
@@ -128,10 +128,16 @@ def find_local_max_newton(m_start, full_coords, k_val):
         # Second derivative of Intensity: d2 = 2 * (Re(A_conj * App) + |Ap|^2)
         d2 = (A_re * App_re + A_im * App_im) + (Ap_re**2 + Ap_im**2)
         
-        if np.abs(d2) < 1e-12:
-            break
-            
-        curr_m -= d1 / d2
+        sign_safe = 1.0 if d2 >= 0.0 else -1.0
+
+        # Prevent division by zero near machine epsilon (1e-16)
+        if np.abs(d2) < 1e-16:
+            d2_safe = d2 + sign_safe * 1e-16
+        else:
+            d2_safe = d2
+
+        curr_m -= d1 / d2_safe
+
 
     # Map scaled direction 'm' back to 'u' space (sin theta)
     # if peak less than BEAM_WIDTH_FACTOR/k and more than 1/k_val
@@ -223,7 +229,7 @@ def get_taylor_density(n_internal):
     """
     # For small n_internal, the Taylor distribution
     # is inferior to the uniform distribution.
-    if n_internal < 50:
+    if n_internal < 100:
         return np.random.rand(n_internal)
     
     # Simulating the Taylor distribution using this approximation.
@@ -258,7 +264,7 @@ def compute_analytical_gradient(pts, k_val, u_peak):
     for i in range(n):
         p_i = pts[i]
         phase = kc * p_i * u_peak
-        # Partial derivatives w.r.t p_i
+        # Partial derivatives w.r.t. p_i
         dre = -kc * u_peak * np.sin(phase)
         dim =  kc * u_peak * np.cos(phase)
         # Gradient of I = (Re^2 + Im^2) / N^2
@@ -305,9 +311,6 @@ def optimize_single_run(n_internal, k_val, iterations, lr):
     best_pts = pts.copy()
     min_sll = 1e10
     for i in range(iterations):
-        # NOTE: The results in the submitted paper were obtained using dynamic frequency scaling.
-        # However, further tests indicate that this frequency increase 
-        # may not actually provide a performance boost.
         sll_val, u_peak = calculate_peak_sll(pts, k_val*min(2*(i+1)/iterations, 1))
         
         if sll_val < min_sll:
@@ -318,13 +321,13 @@ def optimize_single_run(n_internal, k_val, iterations, lr):
         
         # Gradient Normalization for stable descent
         gnorm = np.linalg.norm(grad)
-        if gnorm > 1e-12:
+        if gnorm > 1e-16:
             grad = grad / gnorm * min(max(1/gnorm, MIN_JUMP), 1)
 
         # Descent step
         pts = pts - lr * grad
         pts = enforce_min_element_spacing(pts, k_val)
-    return min_sll, best_pts
+    return min_sll, best_pts 
 
 
 @njit
@@ -341,7 +344,7 @@ def cold_down_stage(start_pts, k_val, iterations, lr):
         
         grad = compute_analytical_gradient(current_pts, k_val, u_peak)
         gnorm = np.linalg.norm(grad)
-        if gnorm > 1e-12:
+        if gnorm > 1e-16:
             grad = grad / gnorm * min(max(1/gnorm, lr), 1)
 
         current_pts = current_pts - lr * grad
@@ -385,23 +388,23 @@ def cold_down_stage(start_pts, k_val, iterations, lr):
 # learning_rate_main = 5e-3
 #######################
 # N = 78, K = 73.0
-# iterations_main = 10_000
-# iterations_refinement = 1_000
-# learning_rate_main = 1e-2
+# iterations_main = 100_000
+# iterations_refinement = 5_000
+# learning_rate_main = 1.2e-3
 
 '''------------------------------- MAIN PART -------------------------------'''
 
 if __name__ == "__main__":
     MIN_DIST = 0.5
     N = 78 # Number of sources
-    K = 73.0 # normalized aperture length 
+    K = 73.0  # normalized aperture length 
     MIN_JUMP = 1/K # Minimum gradient step.
     BEAM_WIDTH_FACTOR = 1.5# Beam width factor [1 .. 1.5] not more 1.5
     n_internal_elements = N - 2
-    total_runs = 1 # Total run count
-    iterations_main = 10_000 # number of iteration main stage gradient decent
-    iterations_refinement = 1_000 # number of iteration stage refinement
-    learning_rate_main = 1e-2 # step of 1 iteration GD
+    total_runs = 10 # Total run count
+    iterations_main = 100_000 # number of iteration main stage gradient decent
+    iterations_refinement = 5_000 # number of iteration stage refinement
+    learning_rate_main = 1.2e-3 # step of 1 iteration GD
 
     all_slls = [] 
     all_configs = []
@@ -444,6 +447,7 @@ if __name__ == "__main__":
 
     # if you need to print in terminal (this coordinates without 0 and 1)
     #print("Final coordinates:", best_pts.tolist())
+    print("best_pts = ", [0] + best_pts.tolist() + [1], ";", sep = "")
 
     # Save the optimized configuration
     with open(f"coordinates_{N}_{K}.txt", "w") as f:
