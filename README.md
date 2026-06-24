@@ -9,8 +9,7 @@ Numerical data for benchmark and large-scale cases (N = 78 to 3000).
 *   **`/coordinates`**: Optimized element positions in `.txt` format. Each file contains a comma-separated list of normalized coordinates $x \in [0, 1]$. These files are provided for independent verification in third-party electromagnetic simulation software and **`visualizer.py`**: A standalone script to reproduce radiation patterns and calculate PSLL values directly from the coordinate files.
 *   **`/plots`**: High-resolution radiation patterns (PDF and PNG) for each reported case, demonstrating the achieved equiripple state.
 * **`/saturation_data`**: Four datasets containing PSLL values and optimized element positions(boundary points 0 and 1 are excluded) for different array average element spacing ($\rho = \{0.75, 1.0, 1.5, 2.0\}$) at a fixed main lobe width ($2/\nu$), optimization zone $u \in [1/\nu, 1]$. This data illustrates the physical saturation floor of the aperture.
-* **`/error_convergence`**: Raw benchmark datasets for various configurations ($N, \nu$) containing computed intensities (Proposed Newton, uniform grid, and high-precision ground truth) along with absolute errors for each independent trial. This data tracks the exact numerical performance across individual realizations to validate the convergence behavior toward the double-precision limit.
-
+* **`/error_convergence`**: Raw benchmark datasets for various configurations ($N, \nu$) containing computed intensities (Proposed Newton, uniform grid, and high-precision ground truth) along with absolute errors for each independent trial. This data tracks the exact numerical performance across individual realizations to validate the convergence behavior toward the double-precision limit and `compare_grid_and_newton.py` script which calculated this table data.
 
 ### 2. /article_figures
 Figures and diagrams used in the paper.
