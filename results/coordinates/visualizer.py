@@ -72,7 +72,7 @@ def select_configuration():
     print("="*64)
     
     try:
-        choice = int(input("Select configuration number (1-8): "))
+        choice = int(input("Select configuration number (1-9): "))
         configs = {
             1: (152, 98.5),
             2: (132, 90.5),
