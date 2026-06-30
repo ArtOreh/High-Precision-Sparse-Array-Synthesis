@@ -17,7 +17,7 @@ Numerical data for benchmark and large-scale cases (N = 78 to 3000).
 ### 2. /article_figures
 Figures and diagrams used in the paper.
 
-### 3. /src
+### 3. Root Directory
 *   **`optimizer.py`**: A Python script that executes the optimization process. By default, it runs a single iteration, displays the resulting beam pattern plot, and saves the element positions to a file named `coordinates_{N}_{K}.txt` in the root directory.
 
 ### 4. /mom_verification
