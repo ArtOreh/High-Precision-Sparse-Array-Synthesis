@@ -18,16 +18,18 @@ spacings = diff(x_coordinates);
 p = patchMicrostrip;
 p = design(p, f_center); 
 
-% Find the largest spacing between elements
-max_step = max(diff(x_coordinates));
-
-% Set the substrate length for each patch slightly larger than the maximum step (with a 30 mm margin)
-p.GroundPlaneLength = max_step + 0.03; 
-p.Substrate.Length  = max_step + 0.03;
+% Compute the uniform structural allocation length for each element's ground plane.
+% Dividing the total expanded aperture by the number of elements ensures 
+% continuous overlapping of the individual sub-elements along the x-axis,
+% thereby forcing the solver to generate a monolithic, seamless ground plane.
+p.GroundPlaneLength = (Aperture_meters + 0.2) / length(pts_normalized); 
+p.Substrate.Length  = (Aperture_meters + 0.2) / length(pts_normalized);
 
 % Set the board width proportional to the wavelength
 p.GroundPlaneWidth  = 0.6 * lambda; 
 p.Substrate.Width   = 0.6 * lambda;
+
+
 
 %% 3. Generate the Linear Array
 array = linearArray;
@@ -35,7 +37,8 @@ array.Element = p;
 array.NumElements = length(pts_normalized);
 array.ElementSpacing = spacings; 
 
-meshData = mesh(array, 'MaxEdgeLength', lambda/10);
+
+meshData = mesh(array, 'MaxEdgeLength', lambda/18);
 
 % Print the number of triangles directly to the command window (console)
 fprintf('  Number of triangles: %d\n', meshData.NumTriangles);
@@ -44,7 +47,8 @@ fprintf('  Number of triangles: %d\n', meshData.NumTriangles);
 figure;
 show(array);
 title('Physical Model of the Patch Array');
-
+%pause;
+%quit;
 
 %% 5. Calculation and Plotting of 2D Radiation Pattern Cut in the XZ-Plane (Cartesian Coordinates)
 % Define elevation angles from -90 to 270 degrees to fully cover the XZ-plane
@@ -82,9 +86,9 @@ title('Normalized Radiation Pattern Section in XZ-Plane');
 export_data = [theta_plot(:), dir_normalized(:)];
 
 % Save to an ASCII text file using space delimiters
-save('patch_array_pattern_42_42.txt', 'export_data', '-ascii');
+save('patch_array_pattern_42_42_mb1.5.txt', 'export_data', '-ascii');
 
 fprintf('=========================================\n');
 fprintf('  DATA SAVED SUCCESSFULLY!\n');
-fprintf('  File: patch_array_pattern_42_42.txt\n');
+fprintf('  File: patch_array_pattern_42_42_mb1.5.txt\n');
 fprintf('=========================================\n');
