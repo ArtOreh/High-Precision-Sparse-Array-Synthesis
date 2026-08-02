@@ -26,10 +26,33 @@ p.GroundPlaneLength = (Aperture_meters + 0.2) / length(pts_normalized);
 p.Substrate.Length  = (Aperture_meters + 0.2) / length(pts_normalized);
 
 % Set the board width proportional to the wavelength
-p.GroundPlaneWidth  = 0.6 * lambda; 
-p.Substrate.Width   = 0.6 * lambda;
+p.GroundPlaneWidth  = 0.7 * lambda; 
+p.Substrate.Width   = 0.7 * lambda;
 
 
+
+%% Print Final Antenna Parameters for the Manuscript
+fprintf('\n--- Final Patch Element Parameters for the Manuscript ---\n');
+fprintf('  Operating Frequency: %.2f GHz\n', f_center / 1e9);
+fprintf('  Wavelength (lambda): %.2f mm\n', lambda * 1000);
+fprintf('  Patch Length: %.2f mm\n', p.Length * 1000);
+fprintf('  Patch Width:  %.2f mm\n', p.Width * 1000);
+fprintf('  Substrate Height (Thickness): %.2f mm\n', p.Height * 1000);
+fprintf('  Substrate Material: %s (EpsilonR = %.1f, LossTangent = %.3f)\n', ...
+    p.Substrate.Name, p.Substrate.EpsilonR, p.Substrate.LossTangent);
+
+% Параметры проводника патча (толщина металла)
+fprintf('  Conductor Material: %s\n', p.Conductor.Name);
+fprintf('  Conductor Conductivity: %.2e S/m\n', p.Conductor.Conductivity);
+if p.Conductor.Thickness == 0
+    fprintf('  Conductor (Patch) Thickness: 0.00 mm (Infinitesimally thin PEC)\n');
+else
+    fprintf('  Conductor (Patch) Thickness: %.3f mm\n', p.Conductor.Thickness * 1000);
+end
+
+% Точка подключения
+fprintf('  Feed Offset (X, Y): [%.2f, %.2f] mm\n', p.FeedOffset(1)*1000, p.FeedOffset(2)*1000);
+fprintf('=========================================================\n');
 
 %% 3. Generate the Linear Array
 array = linearArray;
@@ -47,6 +70,10 @@ fprintf('  Number of triangles: %d\n', meshData.NumTriangles);
 figure;
 show(array);
 title('Physical Model of the Patch Array');
+
+figure;
+mesh(array); 
+title('Computational Mesh of the Patch Array');
 %pause;
 %quit;
 
