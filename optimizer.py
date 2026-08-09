@@ -230,7 +230,7 @@ def get_taylor_density(n_internal):
     # For small n_internal, the Taylor distribution
     # is inferior to the uniform distribution.
     if n_internal < 100:
-        return np.random.rand(n_internal)
+        return np.sort(np.random.rand(n_internal))
     
     # Simulating the Taylor distribution using this approximation.
     u = np.linspace(-0.999, 0.999, n_internal)
@@ -238,7 +238,7 @@ def get_taylor_density(n_internal):
     # Adding noise for accelerating convergence.
     noise = 1/(n_internal + 2)
     coords += noise * np.random.rand(n_internal)
-    return coords
+    return np.sort(coords)
 
 @njit
 def compute_analytical_gradient(pts, k_val, u_peak):
