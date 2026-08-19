@@ -36,8 +36,8 @@ p.GroundPlaneLength = (Aperture_meters + 0.2) / length(pts_normalized);
 p.Substrate.Length  = (Aperture_meters + 0.2) / length(pts_normalized);
 
 % Set the board width proportional to the wavelength
-p.GroundPlaneWidth  = 0.7 * lambda; 
-p.Substrate.Width   = 0.7 * lambda;
+p.GroundPlaneWidth  = 1.2 * lambda; 
+p.Substrate.Width   = 1.2 * lambda;
 
 
 
