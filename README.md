@@ -44,6 +44,18 @@ python optimizer.py
 
 ![Example Case 132](results/plots/132_90.5.png)
 
+## Citation & Publications
+
+If you use this framework or the generated coordinate datasets in your research, please cite the publication:
+
+* **IEEE AWPL Paper:** A. Orekhov, "High-Precision Sparse Array Synthesis via Analytical Gradient Descent," *IEEE Antennas and Wireless Propagation Letters*, vol. 25, 2026.
+  * **Digital Object Identifier (DOI):** [10.1109/LAWP.2026.11689726](https://doi.org/10.1109/LAWP.2026.11689726)
+  * **IEEE Xplore Absolute Link:** [https://ieee.org](https://ieeexplore.ieee.org/document/11689726)
+
+* **Preprint (Planar 2D Extension):** 
+  * **Zenodo Repository / Preprint Link:** [https://zenodo.org](https://zenodo.org/records/22305367)
+
+
 
 ## License
 Distributed under the **GNU General Public License v3 (GPLv3)**.
