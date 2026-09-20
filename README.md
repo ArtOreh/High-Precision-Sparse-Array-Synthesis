@@ -48,7 +48,7 @@ python optimizer.py
 
 If you use this framework or the generated coordinate datasets in your research, please cite the publication:
 
-* **IEEE AWPL Paper:** A. Orekhov, "High-Precision Sparse Array Synthesis via Analytical Gradient Descent," *IEEE Antennas and Wireless Propagation Letters*, vol. 25, 2026.
+* **IEEE AWPL Paper:** A. Orekhov, "Gradient-Based PSLL Minimization for Uniformly Excited Sparse Linear Arrays," *IEEE Antennas and Wireless Propagation Letters*, 2026.
   * **Digital Object Identifier (DOI):** [10.1109/LAWP.2026.3733592](https://doi.org/10.1109/LAWP.2026.3733592)
   * **IEEE Xplore Absolute Link:** [https://ieee.org](https://ieeexplore.ieee.org/document/11689726)
 
