@@ -52,7 +52,7 @@ If you use this framework or the generated coordinate datasets in your research,
   * **Digital Object Identifier (DOI):** [10.1109/LAWP.2026.3733592](https://doi.org/10.1109/LAWP.2026.3733592)
   * **IEEE Xplore Absolute Link:** [https://ieee.org](https://ieeexplore.ieee.org/document/11689726)
 
-* **Preprint (Planar 2D Extension):** 
+* **Preprint:** 
   * **Zenodo Repository / Preprint Link:** [https://zenodo.org](https://zenodo.org/records/22305367)
 
 
